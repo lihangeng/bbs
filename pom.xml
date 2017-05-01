@@ -14,8 +14,39 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>3.0-alpha-1</version>
+			<scope>provided</scope>
+		</dependency>
   </dependencies>
+  
+  
   <build>
     <finalName>bbs</finalName>
+    <plugins>
+    <plugin>
+      <groupId>org.mortbay.jetty</groupId>
+     <artifactId>jetty-maven-plugin</artifactId>
+      <version>8.1.5.v20120716</version>
+      <configuration>
+          <connectors>
+             <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                  <port>8080</port> <!-- 访问端口,默认8080 -->
+              </connector>
+         </connectors>
+         <stopPort>9966</stopPort>
+         <stopKey>foo</stopKey>
+         <scanIntervalSeconds>10</scanIntervalSeconds>
+         <webApp>
+             <!-- web项目根路径 -->
+             <contextPath>/bbs</contextPath>
+         </webApp>
+     </configuration>
+     </plugin>
+     </plugins>
   </build>
 </project>
