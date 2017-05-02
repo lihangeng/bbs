@@ -9,45 +9,30 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Entity;
-/**
- * 论坛版块
- * @author John
- *
- */
+
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)//设置缓存策略
-@Table(name = "t_board")
-public class Board extends BaseDomain {
+@Table(name = "t_board_manager")
+public class BoardManager extends BaseDomain {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	/*
-	 * id
+	 * 版块id
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//主键生成策略
 	@Column(name ="board_id")
 	private int boardId;
 	/*
-	 * 论坛版块名称
+	 * 用户Id
 	 */
-	@Column(name = "board_name")
-	private String boardName;
-	/*
-	 * 论坛版块描述
-	 */
-	@Column(name = "board_desc")
-	private String boardDesc;
-	/*
-	 * 话题名
-	 */
-	@Column(name = "topic_name")
-	private int topicNum;
+	@Column(name ="user_id")
+	private int user_id;
 	
-	public Board(){
+	public BoardManager(){
 		
 	}
 
@@ -59,30 +44,13 @@ public class Board extends BaseDomain {
 		this.boardId = boardId;
 	}
 
-	public String getBoardName() {
-		return boardName;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setBoardName(String boardName) {
-		this.boardName = boardName;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
-	public String getBoardDesc() {
-		return boardDesc;
-	}
-
-	public void setBoardDesc(String boardDesc) {
-		this.boardDesc = boardDesc;
-	}
-
-	public int getTopicNum() {
-		return topicNum;
-	}
-
-	public void setTopicNum(int topicNum) {
-		this.topicNum = topicNum;
-	}
 	
-	
-
 }

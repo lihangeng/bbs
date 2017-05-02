@@ -9,7 +9,7 @@ topic_name INT NOT NULL
 
 create table t_board_manager(
 board_id int PRIMARY KEY,
-USER_id int
+user_id int
 );
 
 create table t_topic(

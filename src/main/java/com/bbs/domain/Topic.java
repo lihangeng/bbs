@@ -70,6 +70,10 @@ public class Topic extends BaseDomain {
 	 */
 	@Column(name ="digest")
 	private int digest;
+	
+	public Topic(){
+		
+	}
 
 	public int getTopicId() {
 		return topicId;

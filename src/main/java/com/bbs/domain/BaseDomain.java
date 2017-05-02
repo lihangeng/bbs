@@ -13,7 +13,7 @@ public class BaseDomain implements Serializable {
 
 	public String toString(){
 		
-		return ToStringBuilder.reflectionToString(this);
+		return ToStringBuilder.reflectionToString(this);//返回对象和属性的值
 		
 	}
 

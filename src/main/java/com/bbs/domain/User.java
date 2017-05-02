@@ -54,6 +54,12 @@ public class User extends BaseDomain {
 	 */
 	@Column(name ="credit")
 	private int credit;
+	/**
+	 * 空构造函数，用于hibernate创建实例对象
+	 */
+	public User(){
+		
+	}
 
 	public int getUserId() {
 		return userId;
