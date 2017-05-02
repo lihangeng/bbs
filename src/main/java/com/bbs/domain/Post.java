@@ -30,25 +30,42 @@ public class Post extends BaseDomain {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/*
+	 * 帖子Id
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="post_id")
 	private int postId;
-	
+	/*
+	 * 所属论坛
+	 */
 	@Column(name="board_id")
 	private int boardId;
 	
+	/*
+	 * 话题，该列建立索引
+	 */
 	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name="topic_id")
 	private Topic topic;
 	
+	/*
+	 * 发表用户，该列建立索引
+	 */
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	/*
+	 * 帖子标题
+	 */
 	@Column(name="post_title")
 	private String postTitle;
 	
+	/*
+	 * 创建时间
+	 */
 	@Column(name="create_time")
 	private String createTime;
 	

@@ -6,6 +6,10 @@ public class Test {
 	private int id;
 	
 	private String name;
+	
+	public Test(){
+		System.out.println(getClass().getGenericSuperclass());
+	}
 
 	
 	public int getId() {
@@ -35,6 +39,7 @@ public class Test {
 		test.setId(1);
 		test.setName("hello");
 		System.out.println(ToStringBuilder.reflectionToString(test));
+		System.out.println(2/3);
 	}
 
 }
