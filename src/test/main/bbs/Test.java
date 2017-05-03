@@ -1,6 +1,7 @@
 package bbs;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springframework.util.Assert;
 
 public class Test {
 	private int id;
@@ -33,13 +34,9 @@ public class Test {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		Test test = new Test();
-		test.setId(1);
-		test.setName("hello");
-		System.out.println(ToStringBuilder.reflectionToString(test));
-		System.out.println(2/3);
+		String str = "";
+		Assert.hasText(str,"error");
 	}
 
 }

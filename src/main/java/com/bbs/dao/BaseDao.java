@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.util.Assert;
@@ -16,10 +20,17 @@ public class BaseDao<T> {
 	@Autowired
 	private HibernateTemplate hibernateTempate;
 	
+	@Autowired
+	private Session session;
+	
 	public HibernateTemplate getHibernateTempate() {
 		return hibernateTempate;
 	}
 	
+	public Session getSession() {
+		return session;
+	}
+
 	public BaseDao(){
 		Type genType = getClass().getGenericSuperclass();
 		Type[] params = ((ParameterizedType)genType).getActualTypeArguments();
@@ -60,8 +71,15 @@ public class BaseDao<T> {
 	public void initalize(Object entity){
 		getHibernateTempate().initialize(entity);
 	}
-	
-	public Page pagedQuery(String sql,int pageNo,int pageSize,Object...values){
+	/**
+	 * 分页查询函数，使用hql
+	 * @param sql
+	 * @param pageNo
+	 * @param pageSize
+	 * @param values
+	 * @return
+	 */
+	public Page pagedQuery(String hql,int pageNo,int pageSize,Object...values){
 		/*
 		 * notNull(Object object) 
                                      当 object 不为 null 时抛出异常
@@ -78,9 +96,58 @@ public class BaseDao<T> {
            isAssignable(Class superType, Class subType) / isAssignable(Class superType, Class subType, String message) 
              subType 必须可以按类型匹配于 superType，否则将抛出异常；         
 		 */
-		Assert.hasText(sql);
-		return null;
-		
+		Assert.hasText(hql);
+		Assert.isTrue(pageNo >= 1,"pageNo shoud start form 1");
+		String countQueryString = "select count(*)"+removeSelect(removeOrders(hql));
+		List countlist = getHibernateTempate().find(countQueryString,values);
+		long totalCount = (Long)countlist.get(0);
+		if(totalCount < 1)
+			return new Page();
+			int startIndex = Page.getStartPage(pageNo,pageSize);
+			Query query = createQuery(hql,values);
+			List list = query.setFirstResult(startIndex).setMaxResults(pageSize).list();
+			return new Page(startIndex,totalCount,pageSize,list);
+	}
+	/**
+	 * 创建query对象
+	 * @param hql
+	 * @param values
+	 * @return
+	 */
+	public Query createQuery(String hql,Object...values){
+		Assert.hasText(hql);
+		Query query = getSession().createQuery(hql);
+		for(int i=0;i<values.length;i++){
+			query.setParameter(i, values[i]);
+		}
+		return query;
+	}
+	/**
+	 * 去除hql的select字句
+	 * @param hql
+	 * @return
+	 */
+	private static String removeSelect(String hql){
+		Assert.hasText(hql);
+		int beginPos = hql.toLowerCase().indexOf("from");
+		Assert.isTrue(beginPos != -1, "hql:"+hql+"must has a keyword 'from'");
+		return hql.substring(beginPos);
+	}
+	/**
+	 * 去除hql的group子句
+	 * @param hql
+	 * @return
+	 */
+	private static String removeOrders(String hql){
+		Assert.hasText(hql);
+	    Pattern p = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*",Pattern.CASE_INSENSITIVE);
+	    Matcher m = p.matcher(hql);
+	    StringBuffer sb = new StringBuffer();
+	    while(m.find()){
+	    	m.appendReplacement(sb, "");
+	    }
+	    m.appendTail(sb);
+	    return sb.toString();
 	}
 
 }
