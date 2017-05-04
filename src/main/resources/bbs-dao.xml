@@ -22,9 +22,31 @@
     p:url="${jdbc.url}"
     p:username="${jdbc.username}"
     p:password="${jdbc.password}"/>
-
-
- 
- 
- 
+<bean id = "sessionFactory"
+      class = "org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+      <property name = "dataSource" ref="dataSource"/>
+      <property name = "packagesToScan">
+      <list>
+         <value>bbs.domain</value>
+      </list>
+      </property>
+      <!-- 指定hibernate属性信息 -->
+      <property name = "hibernateProperties">
+          <props>
+              <!--指定数据库的类型为MySQL-->
+              <prop key="hibernate.dialect">
+                 org.hibernate.dialect.MySQLDialect
+              </prop>
+              <!-- 操作数据库时显示sql语句，在部署时应该设置为false -->
+              <prop key = "hibernate.show_sql">
+                true
+              </prop>
+          </props>
+      </property>
+      </bean>
+      <!-- 定义hibernateTemplate -->
+      <bean id="hibernateTemplate" 
+      class = "org.springframework.orm.hibernate3.hibernateTemplate"
+      p:sessionFactory-ref = "sessionFactory"
+      />
 </beans>
