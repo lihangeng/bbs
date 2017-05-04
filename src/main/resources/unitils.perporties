@@ -1,0 +1,19 @@
+
+#配置启用unitils所需的模块
+unitils.modules=database,dbunit,hibernate,spring
+
+#配置数据库连接
+database.driverClassName = com.mysql.jdbc.Driver
+database.url = jdbc:mysql://localhost/bbs?useUnicode=true&characterEncoding=UTF-8
+database.username = root
+database.password = root
+database.dialect = mysql
+database.schemaName = sampledb
+
+#配置数据库维护策略
+updateDataBaseSchema.enable = true
+
+#配置数据库表创建策略
+
+
+#配置数据集工厂

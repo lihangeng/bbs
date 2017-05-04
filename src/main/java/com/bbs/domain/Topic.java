@@ -66,7 +66,7 @@ public class Topic extends BaseDomain {
 	@Column(name ="topic_replies")
 	private int topicReplies;
 	/*
-	 * 是不是精华话题
+	 * 是不是精华话题  0:不是经精华帖 1：是精华帖 
 	 */
 	@Column(name ="digest")
 	private int digest;

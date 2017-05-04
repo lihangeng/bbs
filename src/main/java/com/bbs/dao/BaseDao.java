@@ -101,8 +101,8 @@ public class BaseDao<T> {
 	 * @param sql
 	 * @return
 	 */
-	public List find(String sql){
-		return getHibernateTempate().find(sql);
+	public List find(String hql){
+		return getHibernateTempate().find(hql);
 	}
 	/**
 	 * 根据Sql和参数返回一个List
@@ -110,8 +110,8 @@ public class BaseDao<T> {
 	 * @param params
 	 * @return
 	 */
-	public List find(String sql,Object...params){
-		return getHibernateTempate().find(sql, params);
+	public List find(String hql,Object...params){
+		return getHibernateTempate().find(hql, params);
 	}
 	/**
 	 * 强制初始化
