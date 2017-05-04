@@ -17,7 +17,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Entity;
-
+/**
+ * Ìû×Ó
+ * @author John
+ *
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)//ÉèÖÃ»º´æ²ßÂÔ
 @Table(name = "t_post")

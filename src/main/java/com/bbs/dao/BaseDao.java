@@ -12,7 +12,12 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.util.Assert;
-
+/**
+ * DAO的基础类，定义了很多公用的方法，子类Dao可以直接用，不需要每个子类再实现一次
+ * @author John
+ *
+ * @param <T>
+ */
 public class BaseDao<T> {
 	
 	private Class<T> entityClass;
@@ -22,7 +27,10 @@ public class BaseDao<T> {
 	
 	@Autowired
 	private Session session;
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public HibernateTemplate getHibernateTempate() {
 		return hibernateTempate;
 	}
@@ -30,44 +38,85 @@ public class BaseDao<T> {
 	public Session getSession() {
 		return session;
 	}
-
+    /**
+     * 
+     */
 	public BaseDao(){
 		Type genType = getClass().getGenericSuperclass();
 		Type[] params = ((ParameterizedType)genType).getActualTypeArguments();
 		entityClass = (Class)params[0];
 	}
+	/**
+	 * 根据ID返回实体的一个代理
+	 * @param id
+	 * @return
+	 */
 	public T load(Serializable id){
 		return getHibernateTempate().load(entityClass, id);
 	}
-	
+	/**
+	 * 根据ID返回一个实体
+	 * @param id
+	 * @return
+	 */
 	public T get(Serializable id){
 		return getHibernateTempate().get(entityClass, id);
 	}
-	
+	/*hibernate的get/load的根本区别分为4点：
+	 * 第一点是：load会抛出异常，get会返回空，一般采用的load方法。
+	 * 第二点是：get只返回实体对象实例。而load返回的是代理类实体对象实例。
+	 * 第三点是：get方法只能使用一级缓存。而load可以使用一级和二级缓存。
+	 * 第四点是：都是通过id得到单个对象的方法
+	 */
+	/**
+	 * 返回所有实体
+	 * @return
+	 */
 	public List<T> loadAll(){
 		return getHibernateTempate().loadAll(entityClass);
 	}
-	
+	/**
+	 * 持久化一个实体到数据库中
+	 * @param entity
+	 */
 	public void save(T entity){
 		getHibernateTempate().save(entity);
 	}
-	
+	/**
+	 * 从数据库中删除一个实体对应的记录
+	 * @param entity
+	 */
 	public void remove(T entity){
 		getHibernateTempate().delete(entity);
 	}
-	
+	/**
+	 * 更新实体到数据库中
+	 * @param entity
+	 */
 	public void update(T entity){
 		getHibernateTempate().update(entity);
 	}
-	
+	/**
+	 * 根据sql语句返回一个List
+	 * @param sql
+	 * @return
+	 */
 	public List find(String sql){
 		return getHibernateTempate().find(sql);
 	}
-	
+	/**
+	 * 根据Sql和参数返回一个List
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
 	public List find(String sql,Object...params){
 		return getHibernateTempate().find(sql, params);
 	}
-	
+	/**
+	 * 强制初始化
+	 * @param entity
+	 */
 	public void initalize(Object entity){
 		getHibernateTempate().initialize(entity);
 	}

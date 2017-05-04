@@ -9,7 +9,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Entity;
-
+/**
+ * 用户和版块的关联实体
+ * @author John
+ *
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)//设置缓存策略
 @Table(name = "t_board_manager")
