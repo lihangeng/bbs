@@ -11,6 +11,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.util.Assert;
 /**
  * DAO的基础类，定义了很多公用的方法，子类Dao可以直接用，不需要每个子类再实现一次
@@ -25,8 +26,6 @@ public class BaseDao<T> {
 	@Autowired
 	private HibernateTemplate hibernateTempate;
 	
-	@Autowired
-	private Session session;
 	/**
 	 * 
 	 * @return
@@ -35,8 +34,16 @@ public class BaseDao<T> {
 		return hibernateTempate;
 	}
 	
+	public void setHibernateTempate(HibernateTemplate hibernateTempate) {
+		this.hibernateTempate = hibernateTempate;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public Session getSession() {
-		return session;
+		return SessionFactoryUtils.getSession(hibernateTempate.getSessionFactory(), true);
 	}
     /**
      * 

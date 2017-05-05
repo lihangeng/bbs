@@ -7,7 +7,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class BaseDomain implements Serializable {
 	
 	/**
-	 * 
+	 * Dao»ù´¡Àà
 	 */
 	private static final long serialVersionUID = 1L;
 
