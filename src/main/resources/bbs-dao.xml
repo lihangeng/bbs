@@ -5,29 +5,33 @@
  xmlns:tx="http://www.springframework.org/schema/tx"
  xmlns:p="http://www.springframework.org/schema/p"
  
- xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.5.xsd
-           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.5.xsd
-           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.5.xsd
+ xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.0.5.xsd">
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
  <!-- 扫描bbs.dao目录下所有标注@Repository的DAO文件 -->          
-<context:component-scan base-package="bbs.dao"/>
+<context:component-scan base-package="com.bbs.dao"/>
 <!-- 引入定义JDBC连接的属性文件 -->
-<context:property-placeholder location ="classpath:jdbc.properites"/>
+<context:property-placeholder location ="classpath:jdbc.properties"/>
 <!-- 定义一个数据源 -->
 <bean id = "dataSource" 
     class = "org.apache.commons.dbcp.BasicDataSource"
-    destory-method="close"
+    destroy-method="close"
     p:driverClassName = "${jdbc.driverClassName}"
     p:url="${jdbc.url}"
     p:username="${jdbc.username}"
     p:password="${jdbc.password}"/>
-<bean id = "sessionFactory"
-      class = "org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
       <property name = "dataSource" ref="dataSource"/>
       <property name = "packagesToScan">
       <list>
-         <value>bbs.domain</value>
+         <value>com.bbs.domain</value>
       </list>
       </property>
       <!-- 指定hibernate属性信息 -->
@@ -46,7 +50,6 @@
       </bean>
       <!-- 定义hibernateTemplate -->
       <bean id="hibernateTemplate" 
-      class = "org.springframework.orm.hibernate3.hibernateTemplate"
-      p:sessionFactory-ref = "sessionFactory"
-      />
+      class = "org.springframework.orm.hibernate3.HibernateTemplate"
+      p:sessionFactory-ref="sessionFactory" />
 </beans>
