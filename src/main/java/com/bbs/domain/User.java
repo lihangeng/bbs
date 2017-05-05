@@ -18,6 +18,8 @@ import org.hibernate.annotations.Entity;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)//设置缓存策略
 @Table(name = "t_user")
 public class User extends BaseDomain {
+	public static final int USER_LOCK = 1;
+	public static final int USER_UNLOCK = 0;
 	/**
 	 * 
 	 */
@@ -54,6 +56,8 @@ public class User extends BaseDomain {
 	 */
 	@Column(name ="credit")
 	private int credit;
+	
+	private String userIp;
 	/**
 	 * 空构造函数，用于hibernate创建实例对象
 	 */
@@ -108,8 +112,13 @@ public class User extends BaseDomain {
 	public void setCredit(int credit) {
 		this.credit = credit;
 	}
-	
 
-	
+	public String getUserIp() {
+		return userIp;
+	}
+
+	public void setUserIp(String userIp) {
+		this.userIp = userIp;
+	}
 
 }

@@ -14,6 +14,9 @@ database.schemaName = sampledb
 updateDataBaseSchema.enable = true
 
 #配置数据库表创建策略
-
+dbMaintainer.autoCreateExecutedScriptsTable=true
+dbMaintainer.script.location=D:/bbsTest/dbscripts
 
 #配置数据集工厂
+DbUnitModule.DataSet.factory.default=org.unitils.dbunit.datasetfactory.impl.MultiSchemaXmlDataSetFactory
+DbUnitModule.ExpectedDataSet.factory.default=org.unitils.dbunit.datasetfactory.impl.MultiSchemaXmlDataSetFactory

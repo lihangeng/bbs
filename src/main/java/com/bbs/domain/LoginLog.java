@@ -1,9 +1,13 @@
 package com.bbs.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -34,8 +38,9 @@ public class LoginLog extends BaseDomain {
 	/*
 	 * 发表者Id
 	 */
-	@Column(name = "user_id")
-	private int user_id;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	/*
 	 * 登录Ip
 	 */
@@ -45,7 +50,7 @@ public class LoginLog extends BaseDomain {
 	 * 登录时间
 	 */
 	@Column(name = "login_datetime")
-	private String loginDatetime;
+	private Date loginDatetime;
 	
 	public LoginLog(){
 		
@@ -58,13 +63,13 @@ public class LoginLog extends BaseDomain {
 	public void setLogId(int logId) {
 		this.logId = logId;
 	}
-
-	public int getUser_id() {
-		return user_id;
+	
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getIp() {
@@ -75,11 +80,11 @@ public class LoginLog extends BaseDomain {
 		this.ip = ip;
 	}
 
-	public String getLoginDatetime() {
+	public Date getLoginDatetime() {
 		return loginDatetime;
 	}
 
-	public void setLoginDatetime(String loginDatetime) {
+	public void setLoginDatetime(Date loginDatetime) {
 		this.loginDatetime = loginDatetime;
 	}
 	

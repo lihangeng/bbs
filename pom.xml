@@ -209,6 +209,38 @@
         <version>0.9.1</version>
     </dependency>
     <!-- dbcp pool end -->
+    
+    <!-- Unitils -dbunit、Spring -->
+     <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-dbunit</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-io</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-DbUnit</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-database</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-spring</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        <dependency>
+             <groupId>org.dbunit</groupId>
+             <artifactId>dbunit</artifactId>
+             <version>2.4.8</version>
+           </dependency>
   </dependencies>
   
   
