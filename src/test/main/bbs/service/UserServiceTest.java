@@ -12,14 +12,18 @@ import org.unitils.spring.annotation.SpringBean;
 import com.bbs.domain.User;
 import com.bbs.exception.UserExistException;
 import com.bbs.service.UserService;
-
+/**
+ * 
+ * @author John
+ *
+ */
 public class UserServiceTest extends BaseServiceTest {
 
 	@SpringBean("userService")
 	private UserService userService;
 	
 	/**
-	 * 在测试初始化中，消除hibernate二级缓存，避免影响测试
+	 * 在测试初始化中，消除hibernate二级缓存，避免影响测试，有时间研究一下二级缓存的存储机制
 	 */
 	@SuppressWarnings("unchecked")
 	@Before
@@ -35,7 +39,10 @@ public class UserServiceTest extends BaseServiceTest {
 		}
 		sf.evictQueries();
 	}
-	
+	/**
+	 * 测试Service注册一个用户
+	 * @throws UserExistException
+	 */
 	@Test
 	public void registerTest() throws UserExistException{
 		User user = new User();
