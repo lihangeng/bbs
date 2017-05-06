@@ -12,7 +12,7 @@ import com.bbs.domain.LoginLog;
 import com.bbs.domain.User;
 import com.bbs.exception.UserExistException;
 /**
- * 用户
+ * 用户业务层
  */
 @Service
 public class UserService {

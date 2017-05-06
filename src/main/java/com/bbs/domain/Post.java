@@ -1,5 +1,7 @@
 package com.bbs.domain;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -71,7 +73,7 @@ public class Post extends BaseDomain {
 	 * 创建时间
 	 */
 	@Column(name="create_time")
-	private String createTime;
+	private Date createTime;
 	
 	public Post(){
 		
@@ -101,11 +103,11 @@ public class Post extends BaseDomain {
 		this.postTitle = postTitle;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 

@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -43,8 +46,9 @@ public class Topic extends BaseDomain {
 	/*
 	 * 发表用户.该列建立索引
 	 */
-	@Column(name ="user_id")
-	private int userId;
+	@ManyToOne
+	@JoinColumn(name ="user_id")
+	private User user;
 	/*
 	 * 发表时间
 	 */
@@ -70,6 +74,9 @@ public class Topic extends BaseDomain {
 	 */
 	@Column(name ="digest")
 	private int digest;
+	
+	@Transient
+	private MainPost mainPost;
 	
 	public Topic(){
 		
@@ -99,12 +106,12 @@ public class Topic extends BaseDomain {
 		this.topicTitle = topicTitle;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getCreateTime() {
@@ -145,6 +152,14 @@ public class Topic extends BaseDomain {
 
 	public void setDigest(int digest) {
 		this.digest = digest;
+	}
+
+	public MainPost getMainPost() {
+		return mainPost;
+	}
+
+	public void setMainPost(MainPost mainPost) {
+		this.mainPost = mainPost;
 	}
 	
 	

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -43,11 +44,13 @@ public class User extends BaseDomain {
 	private String password;
 	/*
 	 * 用户类型
+	 * 1:普通用户 2：管理员
 	 */
 	@Column(name ="user_type")
 	private int userType;
 	/*
 	 * 用户是否被锁
+	 * 0：未锁定 1：锁定
 	 */
 	@Column(name ="locked")
 	private int locked;
@@ -57,6 +60,7 @@ public class User extends BaseDomain {
 	@Column(name ="credit")
 	private int credit;
 	
+	@Transient
 	private String userIp;
 	/**
 	 * 空构造函数，用于hibernate创建实例对象

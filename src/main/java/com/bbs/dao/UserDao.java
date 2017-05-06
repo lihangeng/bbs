@@ -19,7 +19,12 @@ public class UserDao extends BaseDao<User> {
 	 * @return
 	 */
 	public User getUserByName(String userName){
-		User user = (User) getHibernateTempate().find(queryString, userName).get(0);
-		return user;
+		if(getHibernateTempate().find(queryString, userName).size()>0){
+			User user = (User) getHibernateTempate().find(queryString, userName).get(0);
+			return user;
+		}
+		return null;
+		
+		
 	}
 }
