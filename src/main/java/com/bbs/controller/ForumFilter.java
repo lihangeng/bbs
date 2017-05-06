@@ -43,18 +43,31 @@ public class ForumFilter implements Filter {
 			HttpServletRequest httpRequest = (HttpServletRequest)request;
 			User userContext = getSessionUser(httpRequest);
 			//用户未登录，且当前URL资源需要登录才能访问
-			if(userContext == null && isURLLogin(httpRequest.getRequestURL().toString(),httpRequest)){
+			if(userContext == null && !isURLLogin(httpRequest.getRequestURI().toString(),httpRequest)){
 				String toUrl = httpRequest.getRequestURI().toString();
 				if(!StringUtils.isEmpty(httpRequest.getQueryString())){
 					toUrl += "?"+httpRequest.getQueryString();
 				}
+				//将用户请求的url保存在Session中，用于登录之后，跳转到目标URL
 				httpRequest.getSession().setAttribute(CommonConstant.LOGIN_TO_URL, toUrl);
+				//转发到登录页面
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				return;
 			}
-			
+			chain.doFilter(request, response);
 		}
 		
 	}
 
+	//getContextPath是返回的项目上下文的名字（其实也就是项目名）；
+
+    //getServletPath是返回的是项目名到当前jsp文件的路径（意思就是在这个项目首页到文件的路径）
+
+    //getRequestURI是返回的是项目名到整个文件的请求路径
+
+    //getRealPath是返回的文件所在的绝对路劲。相对于当前计算机的真实路径
+
+    //getRequestURL是返回的整个URL的路径请求（意思就是返回的浏览器地址栏的整个地址）
 	private User getSessionUser(HttpServletRequest httpRequest) {
 		return (User) httpRequest.getSession().getAttribute(CommonConstant.USER_CONTEXT);
 	}
