@@ -50,7 +50,7 @@ public class RegisterController extends BaseController{
 		ModelAndView view =new ModelAndView();
 		String name = (String) request.getParameter("name");
 		String password = (String) request.getParameter("password");
-		view.setViewName("success");
+		view.setViewName("successRegister");
 		User user = new User();
 		try{
 			user.setUserName(name);
@@ -61,10 +61,8 @@ public class RegisterController extends BaseController{
 			userService.register(user);
 		}catch(UserExistException e){
 			view.addObject("errorMsg","用户已经存在，请选择其他名字");
-			view.setViewName("forword:/register.jsp");//跳转
+			view.setViewName("register");//跳转
 		}
-		setSessionUser(request,user);
-		System.out.println(getSessionUser(request).getUserName());
 		return view;
 	}
 	

@@ -6,26 +6,44 @@
 <html>
 <head>
 <title>用户注册</title>
-<script>
-   
-   </script>
+   <style>
+#header{
+     height:100px;
+     background:white;
+     }
+#navigation{
+      height:10px;
+      background:black;
+     }
+#content{
+margin:0 auto;border:2px solid #000;width:400px;height:400px
+}
+   </style>
 </head>
 <body>
-<h3>用户注册</h3>
-<form action="bbs/register" method="post" >
+<div id = header><img src="logo.png">  </div>
+<div id = navigation></div>
+<div id = content>
+<h1 id = title style="text-align:center">用户注册</h1>
+<form action="bbs/register" method="post" id = form1>
 <table>
    <tr>
-   <td>姓名</td>
-   <td><input type="text" id="name" name = "name"/> </td>
+   <td><h2>姓名</h2></td>
+   <td><input style="font-size:20px" size="15" type="text" id="name" name = "name"/> </td>
    </tr>
    <tr>
-   <td>密码</td>
-   <td><input type="password" id="password" name = "password"/></td>
+   <td><h2>密码</h2></td>
+   <td><input style="font-size:20px" size="15" type="password" id="password" name = "password"/></td>
    </tr>
    <tr>
-   <td><input class="but" type="submit" value="登录"></td>
+   <td><h2>确认密码</h2></td>
+   <td><input style="font-size:20px" size="15" type="password" id="password" name = "password"/></td>
+   </tr>
+   <tr>
+   <td align="center"><h2><input style="font-size:20px;width:100% " class="but" type="submit" value="登录"></h2></td>
    </tr>
 </table>
 </form>
+</div>
 </body>
 </html>

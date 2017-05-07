@@ -11,7 +11,6 @@
 #navigation{
       height:50px;
       background:black;
-      
      }
 #content{
       
@@ -34,6 +33,7 @@
        }
 </script>
 <title>我爱自驾游</title>
+<link rel="icon" href="timg.ico" type="image/x-icon">
 </head>
 <body>
 <div id="header">

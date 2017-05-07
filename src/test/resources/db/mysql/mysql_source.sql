@@ -40,9 +40,9 @@ CREATE TABLE t_user(
 user_id INT auto_increment PRIMARY KEY,
 user_name VARCHAR(30) NOT NULL,
 password varchar(30) NOT NULL,
-user_type TINYINT NOT NULL,
-locked TINYINT NOT NULL,
-credit INT
+user_type TINYINT NOT NULL default 1,
+locked TINYINT NOT NULL default 0,
+credit INT default 50
 )ENGINE = InnoDB DEFAULT CHARSET = UTF8;
 
 CREATE TABLE t_login_log(
