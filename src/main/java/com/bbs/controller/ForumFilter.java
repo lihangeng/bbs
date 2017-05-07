@@ -16,7 +16,7 @@ import com.bbs.cons.CommonConstant;
 import com.bbs.domain.User;
 /**
  * 
- * 论坛登录验证过滤器,需要在web.xml中配置
+ * 论坛登录验证过滤器,需要在web.xml中配置，如果有多个filter则按照早web.xml文件中配置的顺序进行
  * @author John
  *
  */
@@ -34,7 +34,7 @@ public class ForumFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-		//判断是不是最后一个过滤链
+		//判断是否被这个过滤器所过滤，如果已经被过滤则交个下一个过滤器
         if(request != null && request.getAttribute(FILTERED_REQUEST) != null ){
         	chain.doFilter(request, response);
 		}else{

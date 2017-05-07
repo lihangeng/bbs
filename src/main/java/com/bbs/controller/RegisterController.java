@@ -64,6 +64,7 @@ public class RegisterController extends BaseController{
 			view.setViewName("forword:/register.jsp");//Ìø×ª
 		}
 		setSessionUser(request,user);
+		System.out.println(getSessionUser(request).getUserName());
 		return view;
 	}
 	
