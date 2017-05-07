@@ -1,6 +1,7 @@
 package com.bbs.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,36 @@ public class RegisterController extends BaseController{
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/register",method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request,User user){
+//	@RequestMapping(value = "/bbs/register",method = RequestMethod.POST)
+//	public ModelAndView registerByUser(HttpServletRequest request,User user){
+//		ModelAndView view =new ModelAndView();
+//		view.setViewName("/sucess");//返回的页面名称
+//		try{
+//			userService.register(user);
+//		}catch(UserExistException e){
+//			view.addObject("errorMsg","用户已经存在，请选择其他名字");
+//			view.setViewName("forword:/register.jsp");//跳转
+//		}
+//		setSessionUser(request,user);
+//		return view;
+//		
+//	}
+	
+	//value的"/"放在前面
+	//去掉上下文根路径和url-pattern中的路径之后进行匹配
+	@RequestMapping(value ="/register",method = RequestMethod.POST)
+	public ModelAndView registerByName(HttpServletRequest request,HttpServletResponse response){
 		ModelAndView view =new ModelAndView();
-		view.setViewName("/sucess");//返回的页面名称
+		String name = (String) request.getParameter("name");
+		String password = (String) request.getParameter("password");
+		view.setViewName("success");
+		User user = new User();
 		try{
+			user.setUserName(name);
+			user.setPassword(password);
+			user.setLocked(0);
+			user.setUserIp("");
+			user.setUserType(1);
 			userService.register(user);
 		}catch(UserExistException e){
 			view.addObject("errorMsg","用户已经存在，请选择其他名字");
@@ -39,6 +65,12 @@ public class RegisterController extends BaseController{
 		}
 		setSessionUser(request,user);
 		return view;
+	}
+	
+	@RequestMapping(value = "/test",method = RequestMethod.GET)
+	public ModelAndView test(){
+		System.out.println("success");
+		return null;
 		
 	}
 	

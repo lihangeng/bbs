@@ -62,13 +62,21 @@
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	<servlet>
-		<servlet-name>bbs</servlet-name>
+		<servlet-name>bbs-servlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/bbs-servlet.xml</param-value>
+    </init-param>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>bbs</servlet-name>
+		<servlet-name>bbs-servlet</servlet-name>
 		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>bbs-servlet</servlet-name>
+		<url-pattern>bbs/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
@@ -84,7 +92,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>HiddenHttpMethodFilter</filter-name>
-		<servlet-name>bbs</servlet-name>
+		<servlet-name>bbs-servlet</servlet-name>
 	</filter-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
