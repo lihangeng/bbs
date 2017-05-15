@@ -9,7 +9,7 @@
    window.onload=function(){
 	   <%
 	   session.removeValue("userName");
-	   session.invalidate();
+	   session.invalidate();//销毁session
 	   %>
    }
    setTimeout("window.location.href='/fish-web-bbs/index.jsp'",1800)
