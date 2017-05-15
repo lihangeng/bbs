@@ -4,12 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>操作成功</title>
-<script language=javascript>
+<title>注销成功</title>
+<script language=javascript>  
+   window.onload=function(){
+	   <%
+	   session.removeValue("userName");
+	   session.invalidate();
+	   %>
+   }
    setTimeout("window.location.href='/fish-web-bbs/index.jsp'",1800)
 </script>
 </head>
 <body>
-    登录成功!
+    注销成功!
 </body>
 </html>

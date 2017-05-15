@@ -19,6 +19,22 @@
 margin:0 auto;border:2px solid #000;width:400px;height:400px
 }
    </style>
+   <script type="text/javascript">
+   function check(form){
+	   if(form.name.value ==''){
+		   alert("请输入用户账号");
+		   form.name.focus();
+		   return false;
+	   }
+	   if(form.password.value ==''){
+		   alert("请输入登录密码！");
+		   form.password.focus();
+		   return false;
+	   }
+	   return true;
+	   
+   }
+   </script>
 </head>
 <body>
 <div id = header><img src="logo.png">  </div>
@@ -36,7 +52,7 @@ margin:0 auto;border:2px solid #000;width:400px;height:400px
    <td><input style="font-size:20px" size="15" type="password" id="password" name = "password"/></td>
    </tr>
    <tr>
-   <td align="center"><h2><input style="font-size:20px;width:100% " class="but" type="submit" value="登录"></h2></td>
+   <td align="center"><h2><input style="font-size:20px;width:100% " class="but" type="submit" value="登录" onclick = "return check(this.form)"></h2></td>
    </tr>
 </table>
 </form>

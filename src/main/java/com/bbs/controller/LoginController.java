@@ -28,11 +28,15 @@ public class LoginController extends BaseController {
 		ModelAndView model = new ModelAndView();
 		String userName = (String) request.getParameter("name");
 		String password =  (String) request.getParameter("password");
-		User user = new User();
+		model.setViewName("redirect:/login.jsp");
+		User user = null;
 		user = userDao.getUserByName(userName);
 		if(user != null && user.getPassword().equals(password)){
 			setSessionUser(request,user);
+			request.getSession().setAttribute("userName",userName);
 			model.setViewName("successLogin");
+		}else{
+			model.addObject(ERROR_MSG_KEY, "please input right username or password!");
 		}
 		return model;
 		
