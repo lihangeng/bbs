@@ -46,6 +46,15 @@
     		  document.getElementById("logout").style.display="inline";
     	  }
       }
+      function opens(obj){
+    	  for(var i=1;i<=4;i++){
+    		  if(i == obj){
+    			  document.getElementById("content"+i).style.display="block";
+    		  }else{
+    			  document.getElementById("content"+i).style.display="none";
+    		  }
+    	  }
+      }
 </script>
 <title>我爱自驾游</title>
 <link rel="icon" href="timg.ico" type="image/x-icon">
@@ -55,14 +64,31 @@
 <td><img src="logo.png">  </td><td>此位置显示天气信息</td>
 </div>
 <div id="navigation">
-<h2 id="navigationText">首页</h2><h2 id="navigationText">攻略</h2><h2 id="navigationText">社区</h2><h2 id="navigationText">资讯</h2>
+<h2 id="navigationText" ><a href = "#" onclick = "opens(1)">首页</a></h2><h2 id="navigationText"><a href = "#" onclick = "opens(2)">攻略</a></h2><h2 id="navigationText"><a href = "#" onclick = "opens(3)">社区</a></h2><h2 id="navigationText"><a href = "#" onclick = "opens(4)">资讯</a></h2>
 <h3><a href="login.jsp" id="loginText"><%=username %> </a></h3><h3><a href="register.jsp" id="loginText">注册</a></h3><h3 id = "logout"><a href="logout.jsp" id="loginText">注销</a></h3>
 
 
 
 </div>
-<div id="content">
-
+<div id="content1" style="display:block">
+111
 </div>
+
+
+<div id="content2" style="display:none">
+222
+</div>
+
+
+<div id="content3" style="display:none">
+333
+</div>
+
+
+<div id="content4" style="display:none">
+444
+</div>
+
+
 </body>
 </html>

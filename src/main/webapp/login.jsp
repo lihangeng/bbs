@@ -20,6 +20,18 @@ margin:0 auto;border:2px solid #000;width:400px;height:400px
 }
    </style>
    <script type="text/javascript">
+   <%
+   String errorMsg = null;
+   if(request.getParameter("errorMsg") != null){
+	   errorMsg = request.getParameter("errorMsg").toString() ;
+   }
+   %>
+   window.onload=function(){
+	   var errorMsg = "<%=errorMsg%>";
+	   if(errorMsg != "null"){
+ 		  document.getElementById("errorMsg").style.display="block";
+ 	  }
+   }
    function check(form){
 	   if(form.name.value ==''){
 		   alert("请输入用户账号");
@@ -54,6 +66,7 @@ margin:0 auto;border:2px solid #000;width:400px;height:400px
    <tr>
    <td align="center"><h2><input style="font-size:20px;width:100% " class="but" type="submit" value="登录" onclick = "return check(this.form)"></h2></td>
    </tr>
+   <div id = "errorMsg" style="display:none">请输入正确的用户名或密码!</div>
 </table>
 </form>
 </div>
